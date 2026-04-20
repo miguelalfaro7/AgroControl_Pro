@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  WORKER
+}
+
+enum SupplyType {
+  FERTILIZER
+  COMPOST
+  PESTICIDE
+  TOOL
+}
+
+enum CropType {
+  AVOCADO
+  COFFEE
+}
+
+enum CropStatus {
+  PLANNED
+  GROWING
+  HARVEST
+  RESTING
+}
+
+enum ExpenseCategory {
+  SUPPLIES
+  LABOR
+  TRANSPORT
+}
+
+enum ActivityType {
+  FERTILIZATION
+  FUMIGATION
+  IRRIGATION
+  HARVEST
+}
+
+model User {
+  id           String      @id @default(cuid())
+  name         String
+  email        String      @unique
+  passwordHash String
+  role         Role        @default(WORKER)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  expenses     Expense[]
+  activities   Activity[]
+}
+
+model Supply {
+  id            String           @id @default(cuid())
+  name          String
+  type          SupplyType
+  quantity      Decimal          @db.Decimal(10, 2)
+  unit          String
+  reorderLevel  Decimal          @default(10) @db.Decimal(10, 2)
+  notes         String?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  inventory     Inventory?
+  activities    ActivitySupply[]
+}
+
+model Inventory {
+  id         String   @id @default(cuid())
+  supplyId   String   @unique
+  warehouse  String   @default("Bodega Principal")
+  lastAudit  DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  supply     Supply   @relation(fields: [supplyId], references: [id], onDelete: Cascade)
+}
+
+model Expense {
+  id          String          @id @default(cuid())
+  title       String
+  amount      Decimal         @db.Decimal(10, 2)
+  category    ExpenseCategory
+  occurredAt  DateTime
+  notes       String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  createdById String
+  createdBy   User            @relation(fields: [createdById], references: [id], onDelete: Restrict)
+}
+
+model Lot {
+  id          String      @id @default(cuid())
+  name        String
+  areaHectare Decimal     @db.Decimal(10, 2)
+  location    String?
+  cropType    CropType
+  status      CropStatus  @default(PLANNED)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  crop        Crop?
+  activities  Activity[]
+}
+
+model Crop {
+  id             String      @id @default(cuid())
+  lotId          String      @unique
+  type           CropType
+  plantedAt      DateTime?
+  expectedHarvest DateTime?
+  status         CropStatus  @default(GROWING)
+  notes          String?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  lot            Lot         @relation(fields: [lotId], references: [id], onDelete: Cascade)
+}
+
+model Activity {
+  id          String          @id @default(cuid())
+  type        ActivityType
+  scheduledAt DateTime
+  completedAt DateTime?
+  status      String          @default("programada")
+  notes       String?
+  lotId       String
+  performedById String
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  lot         Lot             @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  performedBy User            @relation(fields: [performedById], references: [id], onDelete: Restrict)
+  supplies    ActivitySupply[]
+}
+
+model ActivitySupply {
+  activityId String
+  supplyId   String
+  quantity   Decimal  @db.Decimal(10, 2)
+
+  activity Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  supply   Supply   @relation(fields: [supplyId], references: [id], onDelete: Cascade)
+
+  @@id([activityId, supplyId])
+}
