@@ -20,7 +20,9 @@ export function InventoryClientPage({
     <div className="space-y-6">
       <section>
         <p className="text-sm uppercase tracking-[0.22em] text-muted-foreground">Inventario</p>
-        <h1 className="mt-2 font-heading text-3xl font-semibold">Control de insumos y herramientas</h1>
+        <h1 className="mt-2 font-heading text-2xl font-semibold leading-tight sm:text-3xl">
+          Control de insumos y herramientas
+        </h1>
         <p className="mt-2 max-w-3xl text-muted-foreground">
           Gestiona cantidades, niveles minimos, bodegas y alertas de abastecimiento para aguacate y cafe.
         </p>

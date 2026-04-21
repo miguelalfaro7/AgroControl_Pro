@@ -28,7 +28,7 @@ export function DashboardCharts({
           <CardTitle>Gastos por mes</CardTitle>
           <CardDescription>Seguimiento financiero de la operacion en curso.</CardDescription>
         </CardHeader>
-        <CardContent className="h-[320px]">
+        <CardContent className="h-[260px] sm:h-[320px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={expensesByMonth}>
               <CartesianGrid vertical={false} strokeDasharray="3 3" opacity={0.2} />
@@ -50,15 +50,15 @@ export function DashboardCharts({
           <CardTitle>Consumo de insumos</CardTitle>
           <CardDescription>Uso acumulado por insumo durante las actividades recientes.</CardDescription>
         </CardHeader>
-        <CardContent className="h-[320px]">
+        <CardContent className="h-[280px] sm:h-[320px]">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={consumptionBySupply} layout="vertical" margin={{ left: 16 }}>
+            <BarChart data={consumptionBySupply} layout="vertical" margin={{ left: 8 }}>
               <CartesianGrid horizontal={false} strokeDasharray="3 3" opacity={0.2} />
               <XAxis type="number" tickLine={false} axisLine={false} />
               <YAxis
                 dataKey="name"
                 type="category"
-                width={120}
+                width={92}
                 tickLine={false}
                 axisLine={false}
               />

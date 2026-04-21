@@ -17,8 +17,7 @@ export function WorkerHighlightCard({
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <CardContent>{children}</CardContent>
+      <CardContent className="px-5 pb-5 sm:px-6 sm:pb-6">{children}</CardContent>
     </Card>
   )
 }
-

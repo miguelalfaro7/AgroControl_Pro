@@ -68,7 +68,7 @@ export function InventoryTable({
             <CardDescription>Administra existencias, busquedas y alertas por stock minimo.</CardDescription>
           </div>
           {canCreateItems ? (
-            <Button onClick={handleCreate}>
+            <Button onClick={handleCreate} className="w-full sm:w-auto">
               <Plus className="size-4" />
               Nuevo insumo
             </Button>
@@ -96,7 +96,7 @@ export function InventoryTable({
 
           <div className="overflow-hidden rounded-3xl border border-border/60">
             <div className="overflow-x-auto">
-              <Table>
+              <Table className="min-w-[880px]">
                 <TableHeader>
                   <TableRow>
                     <TableHead>Insumo</TableHead>

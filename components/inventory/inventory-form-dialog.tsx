@@ -86,11 +86,11 @@ export function InventoryFormDialog({
           <p className={state.success ? "text-sm text-emerald-600" : "text-sm text-destructive"}>{state.message}</p>
         ) : null}
 
-        <div className="flex justify-end gap-3">
-          <Button type="button" variant="outline" onClick={onClose}>
+        <div className="flex flex-col-reverse justify-end gap-3 sm:flex-row">
+          <Button type="button" variant="outline" onClick={onClose} className="w-full sm:w-auto">
             Cancelar
           </Button>
-          <Button type="submit" disabled={pending}>
+          <Button type="submit" disabled={pending} className="w-full sm:w-auto">
             {pending ? "Guardando..." : item ? "Actualizar insumo" : "Crear insumo"}
           </Button>
         </div>
@@ -98,4 +98,3 @@ export function InventoryFormDialog({
     </DialogShell>
   )
 }
-

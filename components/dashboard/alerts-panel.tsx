@@ -26,7 +26,7 @@ export function AlertsPanel({ lowStockItems }: { lowStockItems: InventoryItem[] 
               <AlertTriangle className="size-4" />
               Bajo inventario
             </div>
-            <p className="mt-2">{item.name}</p>
+            <p className="mt-2 break-words">{item.name}</p>
             <p className="mt-1 text-muted-foreground">
               Disponible: {item.quantity} {item.unit}. Minimo sugerido: {item.reorderLevel} {item.unit}.
             </p>
@@ -35,16 +35,15 @@ export function AlertsPanel({ lowStockItems }: { lowStockItems: InventoryItem[] 
 
         {reminders.map((item) => (
           <div key={item} className="rounded-2xl border border-border/60 bg-background/70 p-4 text-sm">
-            <div className="flex items-center gap-2 font-medium">
+            <div className="flex flex-wrap items-center gap-2 font-medium">
               <BellDot className="size-4 text-emerald-600" />
               Recordatorio
-              <Badge className="ml-auto">Agenda</Badge>
+              <Badge className="sm:ml-auto">Agenda</Badge>
             </div>
-            <p className="mt-2 text-muted-foreground">{item}</p>
+            <p className="mt-2 break-words text-muted-foreground">{item}</p>
           </div>
         ))}
       </CardContent>
     </Card>
   )
 }
-

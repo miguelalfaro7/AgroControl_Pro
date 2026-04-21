@@ -23,10 +23,10 @@ export function ActivityList({ activities }: { activities: ActivityItem[] }) {
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
-                <p className="font-medium">{activity.type}</p>
+                <p className="font-medium break-words">{activity.type}</p>
                 <Badge>{activity.status}</Badge>
               </div>
-              <p className="mt-1 text-sm text-muted-foreground">{activity.lotName}</p>
+              <p className="mt-1 break-words text-sm text-muted-foreground">{activity.lotName}</p>
               <p className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
                 <CalendarClock className="size-3.5" />
                 {formatDateTime(activity.scheduledAt)}
@@ -38,4 +38,3 @@ export function ActivityList({ activities }: { activities: ActivityItem[] }) {
     </Card>
   )
 }
-

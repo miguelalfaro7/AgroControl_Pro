@@ -15,7 +15,9 @@ export default async function WorkerDashboardPage() {
     <div className="space-y-6">
       <section>
         <p className="text-sm uppercase tracking-[0.22em] text-muted-foreground">Mi jornada</p>
-        <h1 className="mt-2 font-heading text-3xl font-semibold">Operacion diaria de campo</h1>
+        <h1 className="mt-2 font-heading text-2xl font-semibold leading-tight sm:text-3xl">
+          Operacion diaria de campo
+        </h1>
         <p className="mt-2 max-w-3xl text-muted-foreground">
           {user.name.split(" ")[0]}, aqui tienes tus prioridades del dia, inventario visible y el estado de los lotes activos.
         </p>
@@ -85,7 +87,7 @@ export default async function WorkerDashboardPage() {
               key={lot.id}
               className="rounded-2xl border border-border/60 bg-background/70 p-4"
             >
-              <p className="font-medium">{lot.name}</p>
+              <p className="font-medium break-words">{lot.name}</p>
               <p className="mt-2 text-sm text-muted-foreground">
                 Cultivo: {lot.cropType === "AVOCADO" ? "Aguacate" : "Cafe"}
               </p>
@@ -100,4 +102,3 @@ export default async function WorkerDashboardPage() {
     </div>
   )
 }
-

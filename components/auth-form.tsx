@@ -28,7 +28,7 @@ export function AuthForm({
   return (
     <Card className="w-full max-w-xl border-white/10 bg-white/85 shadow-2xl backdrop-blur dark:bg-slate-950/70">
       <CardHeader>
-        <CardTitle className="text-3xl">{title}</CardTitle>
+        <CardTitle className="break-words text-2xl sm:text-3xl">{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
@@ -67,12 +67,12 @@ export function AuthForm({
             <p className={state.success ? "text-sm text-emerald-600" : "text-sm text-destructive"}>{state.message}</p>
           ) : null}
 
-          <Button type="submit" className="h-11 w-full" disabled={pending}>
+          <Button type="submit" className="h-11 w-full justify-center whitespace-normal" disabled={pending}>
             {pending ? "Procesando..." : mode === "login" ? "Ingresar al panel" : "Crear cuenta"}
           </Button>
 
           <p className="text-sm text-muted-foreground">
-            {mode === "login" ? "¿Aun no tienes cuenta?" : "¿Ya tienes cuenta?"}{" "}
+            {mode === "login" ? "Aun no tienes cuenta?" : "Ya tienes cuenta?"}{" "}
             <Link
               href={mode === "login" ? "/registro" : "/login"}
               className="font-medium text-emerald-700 hover:underline dark:text-emerald-300"
@@ -85,4 +85,3 @@ export function AuthForm({
     </Card>
   )
 }
-
